@@ -4,11 +4,32 @@
     <title>WebchatXyy</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </head>
 
   <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to "WebChat", root_path, class: "navbar-brand" %>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+          <li><%= link_to "Users", users_path %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+
     <%= yield %>
+    </div>
   </body>
 </html>
