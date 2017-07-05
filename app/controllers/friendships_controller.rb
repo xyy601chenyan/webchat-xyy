@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @friends = current_user.friends
+    @friends = current_user.friends.where.not(:name => current_user.name)
   end
 
   def create
@@ -17,10 +17,10 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
+    @friendship = current_user.friendships.find_by(friend_id: params[:id])
     @friendship.destroy
     flash[:notice] = "Removed friendship."
-    redirect_to current_user
+    redirect_to root_url
   end
 
 end

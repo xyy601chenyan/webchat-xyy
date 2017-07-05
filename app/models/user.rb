@@ -14,6 +14,16 @@ class User < ApplicationRecord
 
    has_many :invers_friends, :through => :inverse_friendships, :source => :user
 
+   has_many :conversations, :foreign_key => :sender_id
+
+   def unread(user, friend)
+     conversation= Conversation.between(user.id, friend.id).first
+     if !conversation.nil?
+       conversation.messages.where(read: false, user_id: friend.id).count
+     else
+       0
+     end
+   end
 
 
 
