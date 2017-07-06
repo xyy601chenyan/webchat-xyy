@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "自动生成20个users"
+
+
+create_account = for i in 1..20 do
+     User.create([email: "example#{i}@test.com", password: '12345678', password_confirmation: '12345678', name: "測試用帳號-#{i}"])
+
+   end

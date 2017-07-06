@@ -9,6 +9,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Add</th>
+          <th>Message</th>
 
         </tr>
       </thead>
@@ -24,6 +25,7 @@
             <% else %>
             Your friend
             <% end  %>
+            <td><% link_to "message me!", conversations_path(:sender_id => current_user.id, :recipiend_id => user.id), method: :post %></td>
             <% end %>
           </td>
         </tr>

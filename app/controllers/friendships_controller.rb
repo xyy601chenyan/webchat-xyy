@@ -2,7 +2,8 @@ class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @friends = current_user.friends.where.not(:name => current_user.name)
+    #@friends = current_user.friends.where.not(:name => current_user.name)
+    @friends = current_user.friends
   end
 
   def create
