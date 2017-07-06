@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
 
   def index
     #@friends = current_user.friends.where.not(:name => current_user.name)
-    @friends = current_user.friends
+    @friends = current_user.friends.distinct
   end
 
   def create
