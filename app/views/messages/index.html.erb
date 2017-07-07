@@ -1,41 +1,58 @@
 <% if @over_ten %>
-<%= link_to "Show Previous", "?m=all" %>
+<%= link_to 'Show Previous', '?m=all' %>
+
 <% end %>
 
-<div class="ui segment">
-  <% @messages.each do |message| %>
-  <% if message.body %>
 
-  <% user= User.find(message.user_id) %>
-  <div class="item">
-    <div class="content">
-      <div class="header">
-        <strong>
-          <%= user.name %>:
-        </strong>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-comment"></span> Chat
       </div>
-      <div class="list">
-        <div class="item">
-          <i class="right triangle icon"></i>
-          <%= message.body %>
-          <% unless current_user != user %>
-          <%= link_to "delete", conversation_message_path(@conversation,message),method: "delete" %>
+
+
+
+      <div class="panel-body" id="chat-body">
+            <ul class="chat">
+              <% @messages.each do |message| %>
+              <% if message.body %>
+          <li class="<%= message.user_id == current_user.id ? "right" : "left" %> clearfix">
+            <span class="chat-img <%= message.user_id == current_user.id ? "pull-right" : "pull-left"%> ">
+              <img src="https://ws4.sinaimg.cn/large/006tNc79gy1fhagbftahhj3069069t8o.jpg" alt="User Avatar" class="img-circle" />
+            </span>
+            <div class="chat-body clearfix">
+              <div class="header">
+                <% user = User.find(message.user_id) %>
+                <strong class="primary-font"><%= user.name %> </strong>
+              </div>
+              <p>
+                <div class="word" style="margin-top:20px;">
+                <%= message.body %>
+                </div>
+                <% unless current_user != user %>
+                <%= link_to 'delete', conversation_message_path(@conversation, message), method: :delete, data: { confirm: "Are you sure?" } %>
+                <% end %>
+              </p>
+            </div>
+          </li>
           <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-  <% end %>
-</div>
+                <% end %>
 
- <%= form_for [@conversation, @message], html:{class: "ui reply form"} do |f| %>
- <div class="form-group">
-   <%= f.text_area :body, class: "form-control" %>
+         </ul>
+       </div>
+       <div class="panel-footer">
+         <%= form_for [@conversation, @message] do |f| %>
+         <div class="input-group">
+           <%= f.text_area :body, class: "form-control input-sm", placeholder: "Type your message here..." %>
+           <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+           <span class="input-group-btn">
+             <%= f.submit "Send", class: "btn btn-warning btn-sm", id: "btn-chat" %>
+           </span>
+           <% end %>
+         </div>
+       </div>
+     </div>
+    </div>
  </div>
- <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
- <div>
-   <%= f.submit "Add Reply", class: "btn btn-primary" %>
- </div>
-<% end %>
