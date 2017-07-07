@@ -18,8 +18,9 @@
         </div>
 
         <ul class="nav navbar-nav">
-          <li><a>Hi,<%= current_user.name %>!!</a></li>
+         <li><a>Hi, <%= current_user.name %></a></li>
           <% if user_signed_in? %>
+
           <li><%= link_to '修改账户', edit_user_registration_path %></li>
 
           <li><%= link_to "所有用户", users_path %></li>
