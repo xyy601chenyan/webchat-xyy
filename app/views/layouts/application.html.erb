@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar ">
       <div class="container">
         <div class="navbar-header">
           <%= link_to "WebChat", root_path, class: "navbar-brand" %>
@@ -28,7 +28,9 @@
           <% else %>
           <li><%= link_to "登入", new_user_session_path %></li>
           <% end %>
+          <li style="width:350px;margin-top:5px;margin-left:100px;"><%= render "users/search_bar" %></li>
         </ul>
+
       </div>
     </nav>
 

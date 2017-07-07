@@ -38,6 +38,8 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem "font-awesome-rails"
+gem 'ransack'
+gem 'will_paginate-bootstrap'
 gem 'awesome_rails_console'
 gem 'faye'
 gem 'thin'

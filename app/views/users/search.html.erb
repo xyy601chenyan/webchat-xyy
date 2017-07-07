@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+
+  <% if @users.blank? %>
+  <br>
+  <h4 class="text-center">未找到符合条件的用户</h4>
+  <% else %>
+  <div class="panel-heading">
+    找到的用户
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>昵称</th>
+          <th>邮箱</th>
+          <th>添加好友</th>
+          <th>选项</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <% unless current_user == user %>
+          <td><%=user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <% if !current_user.friends.include?(user) %>
+            <%= link_to  friendships_path(:friend_id => user), :method => :post,class:"btn btn-info" do %>
+                 <i class="fa fa-user-plus" aria-hidden="true"></i>
+                 <% end %>
+            <% else %>
+            已是好友
+            <% end %>
+             <td><%= link_to conversations_path(:sender_id => current_user.id, :recipient_id => user.id), method: :post,class:"btn btn-success" do %>
+               <i class="fa fa-commenting-o" aria-hidden="true"></i>
+               <%end  %>
+             </td>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+      </div>
+  </div>
+  <% end %>
+</div>
