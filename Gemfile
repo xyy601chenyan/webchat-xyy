@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'simple_form'
+gem "font-awesome-rails"
 gem 'awesome_rails_console'
 gem 'faye'
 gem 'thin'

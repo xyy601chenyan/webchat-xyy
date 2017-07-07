@@ -1,5 +1,5 @@
 <% if @over_ten %>
-<%= link_to 'Show Previous', '?m=all' %>
+<%= link_to 'Show Previous', '?m=all',class:"btn btn-primary" %>
 
 <% end %>
 
@@ -7,9 +7,9 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span class="glyphicon glyphicon-comment"></span> Chat
+    <div class="panel panel-info">
+      <div class="panel-heading ">
+        <span class="glyphicon glyphicon-comment"></span> 对话中
       </div>
 
 
@@ -28,9 +28,10 @@
                 <strong class="primary-font"><%= user.name %> </strong>
               </div>
               <p>
-                <div class="word" style="margin-top:20px;">
-                <%= message.body %>
-                </div>
+              
+                <%= simple_format(message.body) %>
+
+
                 <% unless current_user != user %>
                 <%= link_to 'delete', conversation_message_path(@conversation, message), method: :delete, data: { confirm: "Are you sure?" } %>
                 <% end %>
@@ -45,10 +46,10 @@
        <div class="panel-footer">
          <%= form_for [@conversation, @message] do |f| %>
          <div class="input-group">
-           <%= f.text_area :body, class: "form-control input-sm", placeholder: "Type your message here..." %>
+           <%= f.text_area :body, class: "form-control input-sm", placeholder: "输入聊天消息..." %>
            <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
            <span class="input-group-btn">
-             <%= f.submit "Send", class: "btn btn-warning btn-sm", id: "btn-chat" %>
+             <%= f.submit "Send", class: "btn btn-success btn-sm", id: "btn-chat" %>
            </span>
            <% end %>
          </div>

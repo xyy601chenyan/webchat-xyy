@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
      if @message.save
        sync_new @message
      end
-     redirect_to :back
+     redirect_to conversation_messages_path(@conversation)
    end
 
    def destroy
